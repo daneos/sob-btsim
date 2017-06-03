@@ -198,9 +198,10 @@ class MainWindow(SimulationWidget):
 								self.transmission(con)
 								if chunk.progress >= 1:
 									# finish chunk
-									file.peers = file.file.tracker.getPeers(file.file)
+									if chunk.valid:
+										file.peers = file.file.tracker.getPeers(file.file)
+										self.deleteConnection(con)
 									self.deleteChunk(chunk)
-									self.deleteConnection(con)
 					else:
 						for remote_peer in file.peers:
 							con = filter(lambda c: c.seeder == remote_peer and c.receiver == peer, self.connections)
@@ -220,7 +221,10 @@ class MainWindow(SimulationWidget):
 								self.transmission(con)
 								if chunk.progress >= 1:
 									# finish chunk
-									file.setProgress(file.progress + 1 / file.file.chunks)
+									if chunk.valid:
+										file.setProgress(file.progress + 1 / file.file.chunks)
+									else:
+										file.chunk -= 1
 									self.deleteChunk(chunk)
 									if file.progress >= 1:
 										# finish file
