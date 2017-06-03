@@ -45,6 +45,8 @@ class MainWindow(SimulationWidget):
 		self.update()
 
 	def initialize(self):
+		self.clear()
+
 		# generate nodes
 		for i in range(0, config.TRACKERS + config.PEERS):
 			if i >= config.TRACKERS:
@@ -83,10 +85,20 @@ class MainWindow(SimulationWidget):
 		self.nodes.append(node)
 		self.nodes_layout.addWidget(node)
 
+	def deleteNode(self, node):
+		self.nodes_layout.removeWidget(node)
+		self.nodes.remove(node)
+		node.deleteLater()
+
 	def addFile(self, name, chunks, tracker):
 		file = TorrentFile(name, chunks, tracker)
 		self.files.append(file)
 		self.files_layout.addWidget(file)
+
+	def deleteFile(self, file):
+		self.files_layout.removeWidget(file)
+		self.files.remove(file)
+		file.deleteLater()
 
 	def addConnection(self, seeder, peer):
 		con = Connection(seeder, peer, random.randint(*config.SPEED_RANGE))
@@ -107,6 +119,16 @@ class MainWindow(SimulationWidget):
 		self.chunks_layout.removeWidget(chunk)
 		self.chunks.remove(chunk)
 		chunk.deleteLater()
+
+	def clear(self):
+		for n in self.nodes:
+			self.deleteNode(n)
+		for f in self.files:
+			self.deleteFile(f)
+		for c in self.connections:
+			self.deleteConnection(c)
+		for c in self.chunks:
+			self.deleteChunk(c)
 
 	def announce(self):
 		for peer in peers(self.nodes):

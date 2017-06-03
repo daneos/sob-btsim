@@ -10,6 +10,7 @@ class Chunk(SimulationWidget):
 		self.file = file
 		self.n = n
 		self.progress = 0
+		self.valid = True
 
 	def update(self, step):
 		SimulationWidget.update(self, step)
@@ -32,3 +33,6 @@ class Chunk(SimulationWidget):
 
 	def setProgress(self, progress):
 		self.progress = progress
+
+	def invalidate(self):
+		self.valid = False
