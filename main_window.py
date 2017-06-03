@@ -190,7 +190,7 @@ class MainWindow(SimulationWidget):
 							chunk = filter(lambda c: c.con == con, self.chunks)
 							if not chunk:
 								# request chunk from peer
-								self.addChunk(con, file.file, random.randint(1, file.file.chunks))
+								self.addChunk(con, file.file, file.nextChunk())
 							else:
 								# transmit file data
 								chunk = chunk[0]
