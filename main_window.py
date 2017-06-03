@@ -101,7 +101,7 @@ class MainWindow(SimulationWidget):
 		file.deleteLater()
 
 	def addConnection(self, seeder, peer):
-		con = Connection(seeder, peer, random.randint(*config.SPEED_RANGE))
+		con = Connection(seeder, peer, random.randint(*config.SPEED_RANGE), parent=self)
 		self.connections.append(con)
 		self.connections_layout.addWidget(con)
 
@@ -109,6 +109,12 @@ class MainWindow(SimulationWidget):
 		self.connections_layout.removeWidget(con)
 		self.connections.remove(con)
 		con.deleteLater()
+
+	def purgeConnection(self, con):
+		for chunk in [c for c in self.chunks if c.con == con]:
+			self.deleteChunk(chunk)
+		self.deleteConnection(con)
+		# self.update(-1)
 
 	def addChunk(self, con, file, n):
 		chunk = Chunk(con, file, n)

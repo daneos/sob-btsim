@@ -31,9 +31,9 @@ class Chunk(SimulationWidget):
 			self.FilenameLabel.setText(self.file.name)
 
 		if not self.valid:
-			self.NumberLabel.setStyleSheet("background:red")
+			self.setStyleSheet("background:red")
 		else:
-			self.NumberLabel.setStyleSheet("")
+			self.setStyleSheet("")
 		self.SIDLabel.setText(str(self.con.seeder.id))
 		self.CIDLabel.setText(str(self.con.receiver.id))
 		self.ProgressBar.setValue(self.progress * 100)

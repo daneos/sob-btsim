@@ -1,3 +1,5 @@
+from PyQt4 import QtGui
+
 from simulation_widget import SimulationWidget
 
 
@@ -8,6 +10,7 @@ class Connection(SimulationWidget):
 		self.receiver = receiver
 		self.speed = speed
 		self.transmitted = 0
+		self.parent = parent
 
 	def update(self, step):
 		SimulationWidget.update(self, step)
@@ -19,3 +22,12 @@ class Connection(SimulationWidget):
 
 	def transmission(self):
 		self.transmitted += self.speed
+
+	def contextMenuEvent(self, ev):
+		menu = QtGui.QMenu(self)
+		close = menu.addAction("Close connection")
+		action = menu.exec_(self.mapToGlobal(ev.pos()))
+
+		if action == close:
+			if self.parent:
+				self.parent.purgeConnection(self)
