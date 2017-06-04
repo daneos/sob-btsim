@@ -41,6 +41,9 @@ class MainWindow(SimulationWidget):
 
 		self.connect(self.InitializeButton, QtCore.SIGNAL("clicked()"), self.initialize)
 		self.connect(self.StepButton, QtCore.SIGNAL("clicked()"), self.doSteps)
+		self.connect(self.CloseAllButton, QtCore.SIGNAL("clicked()"), self.closeAll)
+		self.connect(self.InvalidateAllButton, QtCore.SIGNAL("clicked()"), self.invalidateAll)
+		self.connect(self.ValidateAllButton, QtCore.SIGNAL("clicked()"), self.validateAll)
 
 		self.update()
 
@@ -239,3 +242,16 @@ class MainWindow(SimulationWidget):
 										self.deleteConnection(con)
 		self.steps += 1
 		self.update()
+
+	def closeAll(self):
+		map(self.purgeConnection, self.connections[::-1])
+
+	def invalidateAll(self):
+		for c in self.chunks:
+			c.valid = False
+			c.update(-1)
+
+	def validateAll(self):
+		for c in self.chunks:
+			c.valid = True
+			c.update(-1)

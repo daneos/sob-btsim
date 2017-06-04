@@ -45,7 +45,7 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>221</width>
+          <width>219</width>
           <height>471</height>
          </rect>
         </property>
@@ -82,7 +82,7 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>222</width>
+          <width>219</width>
           <height>471</height>
          </rect>
         </property>
@@ -110,6 +110,16 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="CloseAllButton">
+       <property name="text">
+        <string>Close all</string>
+       </property>
+       <property name="icon">
+        <iconset theme="list-remove"/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QScrollArea" name="ConnectionList">
        <property name="widgetResizable">
         <bool>true</bool>
@@ -119,8 +129,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>221</width>
-          <height>471</height>
+          <width>220</width>
+          <height>431</height>
          </rect>
         </property>
        </widget>
@@ -147,6 +157,31 @@
       </widget>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QPushButton" name="InvalidateAllButton">
+         <property name="text">
+          <string>Invalidate all</string>
+         </property>
+         <property name="icon">
+          <iconset theme="list-remove">
+           <normaloff>../../../</normaloff>../../../</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="ValidateAllButton">
+         <property name="text">
+          <string>Validate all</string>
+         </property>
+         <property name="icon">
+          <iconset theme="ok"/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
       <widget class="QScrollArea" name="ChunkList">
        <property name="widgetResizable">
         <bool>true</bool>
@@ -156,8 +191,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>222</width>
-          <height>471</height>
+          <width>230</width>
+          <height>429</height>
          </rect>
         </property>
        </widget>
