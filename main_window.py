@@ -231,9 +231,10 @@ class MainWindow(SimulationWidget):
 								if chunk.progress >= 1:
 									# finish chunk
 									if chunk.valid:
+										file.completeChunk()
 										file.setProgress(file.progress + 1 / file.file.chunks)
-									else:
-										file.chunk -= 1
+									# else:
+									# 	file.chunk -= 1
 									self.deleteChunk(chunk)
 									if file.progress >= 1:
 										# finish file

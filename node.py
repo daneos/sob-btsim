@@ -80,7 +80,7 @@ class FileListWidget(SimulationWidget):
 
 		self.file = file
 		self.peers = []
-		self.chunk = 0
+		self.chunk = 1
 		self.progress = progress
 
 		self.update(0)
@@ -101,8 +101,10 @@ class FileListWidget(SimulationWidget):
 		self.peers = peers
 
 	def nextChunk(self):
-		self.chunk += 1
 		return self.chunk
+
+	def completeChunk(self):
+		self.chunk += 1
 
 
 class ClientListWidget(SimulationWidget):
