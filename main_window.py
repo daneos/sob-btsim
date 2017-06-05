@@ -24,11 +24,7 @@ class MainWindow(SimulationWidget):
 		self.connections = []
 		self.chunks = []
 
-		self.steps = 0
-		self.total_data = 0
-		self.total_files = 0
-		self.avg_speed = 0
-		self.ratio = 0.0
+		self.zeroStats()
 
 		self.nodes_layout = QtGui.QVBoxLayout()
 		self.NodeListContent.setLayout(self.nodes_layout)
@@ -130,14 +126,18 @@ class MainWindow(SimulationWidget):
 		chunk.deleteLater()
 
 	def clear(self):
-		for n in self.nodes:
-			self.deleteNode(n)
-		for f in self.files:
-			self.deleteFile(f)
-		for c in self.connections:
-			self.deleteConnection(c)
-		for c in self.chunks:
-			self.deleteChunk(c)
+		map(self.deleteChunk, self.chunks[::-1])
+		map(self.deleteConnection, self.connections[::-1])
+		map(self.deleteFile, self.files[::-1])
+		map(self.deleteNode, self.nodes[::-1])
+		self.zeroStats()
+
+	def zeroStats(self):
+		self.steps = 0
+		self.total_data = 0
+		self.total_files = 0
+		self.avg_speed = 0
+		self.ratio = 0.0
 
 	def announce(self):
 		for peer in peers(self.nodes):
